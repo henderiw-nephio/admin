@@ -1,0 +1,82 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  creationTimestamp: null
+  name: manager-role
+  labels:
+    pkg.ndd.yndd.io/controller: admin
+rules:
+- apiGroups:
+  - admin.yndd.io
+  resources:
+  - tenants
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - admin.yndd.io
+  resources:
+  - tenants/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - admin.yndd.io
+  resources:
+  - tenants/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - porch.kpt.dev
+  resources:
+  - packagerevisionresources
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - porch.kpt.dev
+  resources:
+  - packagerevisionresources/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - porch.kpt.dev
+  resources:
+  - packagerevisions
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - porch.kpt.dev
+  resources:
+  - packagerevisions/approval
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - porch.kpt.dev
+  resources:
+  - packagerevisions/status
+  verbs:
+  - get
+  - patch
+  - update

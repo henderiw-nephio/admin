@@ -1,0 +1,23 @@
+apiVersion: fn.kpt.dev/v1alpha1
+kind: SetValue
+metadata:
+  name: arg-fn-config
+  annotations:
+    config.kubernetes.io/local-config: "true"
+  namespace: ndd-system
+  labels:
+    pkg.ndd.yndd.io/controller: admin
+spec:
+- data: |
+    - --health-probe-bind-address=:8081
+    - --metrics-bind-address=127.0.0.1:8080
+    - --leader-elect
+    - --debug
+  targets:
+  - select:
+      kind: Deployment
+      name: controller-manager
+    fieldPaths:
+    - spec.template.spec.containers.[name=manager].args
+    options:
+      create: true

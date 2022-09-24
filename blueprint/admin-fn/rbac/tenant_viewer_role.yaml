@@ -1,0 +1,22 @@
+# permissions for end users to view tenants.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: tenant-viewer-role
+  labels:
+    pkg.ndd.yndd.io/controller: admin
+rules:
+- apiGroups:
+  - admin.yndd.io
+  resources:
+  - tenants
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - admin.yndd.io
+  resources:
+  - tenants/status
+  verbs:
+  - get

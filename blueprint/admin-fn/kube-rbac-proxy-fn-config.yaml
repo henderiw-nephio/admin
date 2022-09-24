@@ -1,0 +1,29 @@
+apiVersion: fn.kpt.dev/v1alpha1
+kind: SetValue
+metadata:
+  name: kube-rbac-proxy-fn-config
+  annotations:
+    config.kubernetes.io/local-config: "true"
+  namespace: ndd-system
+  labels:
+    pkg.ndd.yndd.io/controller: admin
+spec:
+- data: |
+    name: kube-rbac-proxy
+    image: gcr.io/kubebuilder/kube-rbac-proxy:v0.8.0
+    args:
+    - --secure-listen-address=0.0.0.0:8443
+    - --upstream=http://127.0.0.1:8080/
+    - --logtostderr=true
+    - --v=10
+    ports:
+    - containerPort: 8443
+      name: https
+  targets:
+  - select:
+      kind: Deployment
+      name: controller-manager
+    fieldPaths:
+    - spec.template.spec.containers.[name=kube-rbac-proxy]
+    options:
+      create: true

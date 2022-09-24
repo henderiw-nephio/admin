@@ -1,0 +1,48 @@
+apiVersion: fn.kpt.dev/v1alpha1
+kind: SetValue
+metadata:
+  name: env-fn-config
+  annotations:
+    config.kubernetes.io/local-config: "true"
+  namespace: ndd-system
+  labels:
+    pkg.ndd.yndd.io/controller: admin
+spec:
+- data: |
+    - name: POD_NAMESPACE
+      vaiueFrom:
+        apiVersion: v1
+        FieldPath: "metadata.namespace"
+    - name: "POD_IP"
+      vaiueFrom:
+        apiVersion: v1
+        FieldPath: status.podIP
+    - name: POD_NAME
+      vaiueFrom:
+        apiVersion: v1
+        FieldPath: metadata.name
+    - name: "NODE_NAME"
+      vaiueFrom:
+        apiVersion: v1
+        FieldPath: spec.nodeName
+    - name: "NODE_IP"
+      vaiueFrom:
+        apiVersion: v1
+        FieldPath: status.hostIP
+    - name: GRPC_SVC_NAME
+      vaiue: xx
+    - name: GRPC_CERT_SECRET_NAME
+      value: xx
+    - name: SERVICE_DISCOVERY
+      value: k8s
+    - name: SERVICE_DISCOVERY_NAMESPACE
+      value: ndd-system
+    - name: SERVICE_DISCOVERY_DCNAME
+  targets:
+  - select:
+      kind: Deployment
+      name: controller-manager
+    fieldPaths:
+    - spec.template.spec.containers.[name=manager].env
+    options:
+      create: true

@@ -1,0 +1,32 @@
+apiVersion: kpt.dev/v1
+kind: Kptfile
+metadata:
+  name: admin
+  annotations:
+    config.kubernetes.io/local-config: "true"
+  namespace: ndd-system
+  labels:
+    pkg.ndd.yndd.io/controller: admin
+info:
+  description: sample description
+pipeline:
+  mutators:
+    - image: gcr.io/kpt-fn/set-image:v0.1.1
+      configMap:
+        name: controller:latest
+        newName: yndd/admin-controller
+        newTag: latest
+    - image: gcr.io/kpt-fn/set-namespace:v0.4.1
+      configMap:
+        namespace: ndd-system
+    - image: gcr.io/kpt-fn/set-labels:v0.1.5
+      configPath: labels-fn-config.yaml
+    - image: docker.io/henderiw/set-value:latest
+      configPath: arg-fn-config.yaml
+    - image: docker.io/henderiw/set-value:latest
+      configPath: env-fn-config.yaml
+    - image: docker.io/henderiw/set-value:latest
+      configPath: kube-rbac-proxy-fn-config.yaml
+    - image: docker.io/henderiw/set-serviceaccount
+      configMap:
+        name: admin-controller
