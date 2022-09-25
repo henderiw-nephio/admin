@@ -38,7 +38,7 @@ func (x *namespace) AddResource(n *kyaml.RNode) {
 func BuildNamespace(name string) (*kyaml.RNode, error) {
 	ns := &corev1.Namespace{
 		TypeMeta: metav1.TypeMeta{
-			Kind: "Namespace",
+			Kind:       "Namespace",
 			APIVersion: corev1.SchemeGroupVersion.Identifier(),
 		},
 		ObjectMeta: metav1.ObjectMeta{
