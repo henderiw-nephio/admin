@@ -1,4 +1,3 @@
----
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
@@ -51,14 +50,10 @@ spec:
         description: Tenant is the Schema for the tenants API
         properties:
           apiVersion:
-            description: 'APIVersion defines the versioned schema of this representation
-              of an object. Servers should convert recognized schemas to the latest
-              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            description: 'APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
             type: string
           kind:
-            description: 'Kind is a string value representing the REST resource this
-              object represents. Servers may infer this from the endpoint the client
-              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            description: 'Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
             type: string
           metadata:
             type: object
@@ -66,22 +61,18 @@ spec:
             description: TenantSpec defines the desired state of Tenant
             properties:
               lifecycle:
-                description: Lifecycle determines the deletion and deployment lifecycle
-                  policies the resource will follow
+                description: Lifecycle determines the deletion and deployment lifecycle policies the resource will follow
                 properties:
                   deletionPolicy:
                     default: delete
-                    description: DeletionPolicy specifies what will happen to the
-                      underlying external when this managed resource is deleted -
-                      either "delete" or "orphan" the external resource.
+                    description: DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "delete" or "orphan" the external resource.
                     enum:
                     - delete
                     - orphan
                     type: string
                   deploymentPolicy:
                     default: active
-                    description: Active specifies if the managed resource is active
-                      or plannned
+                    description: Active specifies if the managed resource is active or plannned
                     enum:
                     - active
                     - planned
@@ -91,41 +82,32 @@ spec:
                 description: Properties define the properties of the Tenant
                 properties:
                   availabilityZone:
-                    description: AvailabilityZone identifies the az the tenant belongs
-                      to
+                    description: AvailabilityZone identifies the az the tenant belongs to
                     type: string
                   clusterRef:
-                    description: 'Namespace -> TBD: this attribute could also be allocated
-                      dynamically Namespace string `json:"namespace"` ClusterRef identifies
-                      the cluster where the tenant operator executes its tasks'
+                    description: 'Namespace -> TBD: this attribute could also be allocated dynamically Namespace string `json:"namespace"` ClusterRef identifies the cluster where the tenant operator executes its tasks'
                     type: string
                   deployment:
-                    description: Deployment identifies the deployment the tenant belongs
-                      to
+                    description: Deployment identifies the deployment the tenant belongs to
                     type: string
                   organaizationRef:
-                    description: OrganizationRef identifies the organization the tenant
-                      belongs to
+                    description: OrganizationRef identifies the organization the tenant belongs to
                     type: string
                   ownerRef:
-                    description: OwnerRef identifies the entity that is responsible
-                      for the tenant. The ownerRef is a resource that is typically
-                      used for resellers and integrators.
+                    description: OwnerRef identifies the entity that is responsible for the tenant. The ownerRef is a resource that is typically used for resellers and integrators.
                     type: string
                   region:
                     description: Region identifies the region the tenant belongs to
                     type: string
                   repositoryRef:
-                    description: RepositoryRef identifies the repo where the tenant
-                      information is consolidated
+                    description: RepositoryRef identifies the repo where the tenant information is consolidated
                     type: string
                 required:
                 - clusterRef
                 - repositoryRef
                 type: object
               targetRef:
-                description: TargetReference specifies which target will be used to
-                  perform crud operations for the managed resource
+                description: TargetReference specifies which target will be used to perform crud operations for the managed resource
                 properties:
                   name:
                     description: Name of the referenced object.
@@ -143,25 +125,20 @@ spec:
                   description: A Condition that may apply to a resource
                   properties:
                     kind:
-                      description: Type of this condition. At most one of each condition
-                        type may apply to a resource at any point in time.
+                      description: Type of this condition. At most one of each condition type may apply to a resource at any point in time.
                       type: string
                     lastTransitionTime:
-                      description: LastTransitionTime is the last time this condition
-                        transitioned from one status to another.
+                      description: LastTransitionTime is the last time this condition transitioned from one status to another.
                       format: date-time
                       type: string
                     message:
-                      description: A Message containing details about this condition's
-                        last transition from one status to another, if any.
+                      description: A Message containing details about this condition's last transition from one status to another, if any.
                       type: string
                     reason:
-                      description: A Reason for this condition's last transition from
-                        one status to another.
+                      description: A Reason for this condition's last transition from one status to another.
                       type: string
                     status:
-                      description: Status of this condition; is it currently True,
-                        False, or Unknown?
+                      description: Status of this condition; is it currently True, False, or Unknown?
                       type: string
                   required:
                   - kind
@@ -180,26 +157,20 @@ spec:
                         healthKind:
                           type: string
                         lastTransitionTime:
-                          description: LastTransitionTime is the last time this condition
-                            transitioned from one status to another.
+                          description: LastTransitionTime is the last time this condition transitioned from one status to another.
                           format: date-time
                           type: string
                         message:
-                          description: A Message containing details about this condition's
-                            last transition from one status to another, if any.
+                          description: A Message containing details about this condition's last transition from one status to another, if any.
                           type: string
                         reason:
-                          description: A Reason for this condition's last transition
-                            from one status to another.
+                          description: A Reason for this condition's last transition from one status to another.
                           type: string
                         resourceName:
-                          description: Kind of this condition. At most one of each
-                            condition kind may apply to a resource at any point in
-                            time.
+                          description: Kind of this condition. At most one of each condition kind may apply to a resource at any point in time.
                           type: string
                         status:
-                          description: Status of this condition; is it currently True,
-                            False, or Unknown?
+                          description: Status of this condition; is it currently True, False, or Unknown?
                           type: string
                       required:
                       - healthKind
@@ -209,8 +180,7 @@ spec:
                       type: object
                     type: array
                   lastTransitionTime:
-                    description: LastTransitionTime is the last time this condition
-                      transitioned from one status to another.
+                    description: LastTransitionTime is the last time this condition transitioned from one status to another.
                     format: date-time
                     type: string
                   percentage:
@@ -227,8 +197,7 @@ spec:
                 description: Oda []Tag `json:"oda,omitempty"`
                 type: object
               rootPaths:
-                description: rootPaths define the rootPaths of the cr, used to monitor
-                  the resource status
+                description: rootPaths define the rootPaths of the cr, used to monitor the resource status
                 items:
                   type: string
                 type: array

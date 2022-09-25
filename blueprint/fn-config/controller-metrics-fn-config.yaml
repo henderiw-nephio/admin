@@ -1,0 +1,19 @@
+apiVersion: fn.kptgen.dev/v1alpha1
+kind: Config
+metadata:
+  name: metrics
+  annotations:
+    config.kubernetes.io/local-config: "true"
+  namespace: ndd-system
+spec:
+  selector:
+    kind: Deployment
+    name: controller
+    containerName: controller
+  services:
+  - spec:
+      ports:
+      - name: grpc
+        port: 8443
+        targetPort: 443
+        protocol: TCP

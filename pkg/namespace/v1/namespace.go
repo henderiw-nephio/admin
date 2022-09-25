@@ -39,7 +39,6 @@ func BuildNamespace(name string) (*kyaml.RNode, error) {
 	ns := &corev1.Namespace{
 		TypeMeta: metav1.TypeMeta{
 			Kind: "Namespace",
-			//APIVersion: "v1",
 			APIVersion: corev1.SchemeGroupVersion.Identifier(),
 		},
 		ObjectMeta: metav1.ObjectMeta{

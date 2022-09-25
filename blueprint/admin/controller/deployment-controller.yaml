@@ -1,6 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  annotations: {}
   creationTimestamp: null
   name: admin-controller
   namespace: ndd-system
@@ -8,13 +9,15 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      fn.kptgen.dev/pod: controller
+      fn.kptgen.dev/controller: admin-controller
+      fn.kptgen.dev/metrics: admin-controller
   strategy: {}
   template:
     metadata:
       creationTimestamp: null
       labels:
-        fn.kptgen.dev/pod: controller
+        fn.kptgen.dev/controller: admin-controller
+        fn.kptgen.dev/metrics: admin-controller
       name: admin-controller
       namespace: ndd-system
     spec:
@@ -97,5 +100,11 @@ spec:
           capabilities:
             drop:
             - ALL
+        volumeMounts:
+        - mountPath: profiler
+          name: admin-controller-profiler
       serviceAccountName: admin-controller
+      volumes:
+      - emptyDir: {}
+        name: admin-controller-profiler
 status: {}

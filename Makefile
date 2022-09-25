@@ -140,7 +140,7 @@ KUSTOMIZE_VERSION ?= v3.8.7
 CONTROLLER_TOOLS_VERSION ?= v0.9.2
 ENVTEST_K8S_VERSION ?= 1.24.2
 KPT_VERSION ?= main
-KPTGEN_VERSION ?= main
+KPTGEN_VERSION ?= v.0.0.5
 
 KUSTOMIZE_INSTALL_SCRIPT ?= "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"
 .PHONY: kustomize

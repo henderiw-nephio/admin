@@ -1,8 +1,9 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
+  annotations: {}
   creationTimestamp: null
-  name: admin-leader-election-role
+  name: admin-controller-leader-election-role
   namespace: ndd-system
 rules:
 - apiGroups:

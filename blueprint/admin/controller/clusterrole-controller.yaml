@@ -1,8 +1,9 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
+  annotations: {}
   creationTimestamp: null
-  name: admin-controller-role
+  name: admin-controller-controller-role
 rules:
 - apiGroups:
   - '*'
