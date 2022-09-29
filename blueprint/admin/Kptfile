@@ -7,8 +7,3 @@ metadata:
     config.kubernetes.io/local-config: "true"
 info:
   description: admin controller
-pipeline:
-  mutators:
-  - image: docker.io/henderiw/set-image-with-configmap:0.0.1
-    configMap:
-      name: transform-image
