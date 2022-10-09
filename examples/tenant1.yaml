@@ -10,7 +10,8 @@ spec:
     availabilityZone: az1
     repositoryRef: mgmt-admin
     applications:
-      topology: true
+      install:
+        topology: true
       packageRef:
         repository: yndd-app-packages
         packageName: applications

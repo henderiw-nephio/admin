@@ -15,9 +15,11 @@ metadata:
   namespace: ndd-system
 spec:
   ports:
-  - name: grpc
+  - name: metrics
     port: 8443
     protocol: TCP
     targetPort: 443
   selector:
     fn.kptgen.dev/metrics: admin-controller
+status:
+  loadBalancer: {}

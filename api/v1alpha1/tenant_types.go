@@ -49,7 +49,7 @@ type TenantProperties struct {
 
 type TenantApplications struct {
 	// Application identifies if an application should be installed or not
-	Application map[string]bool `json:"inline"`
+	Installation map[string]bool `json:"install,omitempty"`
 	// PackageRef identifies the package revision to deploy
 	PackageRef PackageRevisionReference `json:"packageRef"`
 }

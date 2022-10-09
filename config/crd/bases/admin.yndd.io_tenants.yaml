@@ -94,7 +94,7 @@ spec:
                     description: Applications identify the application information
                       of the tenant
                     properties:
-                      inline:
+                      install:
                         additionalProperties:
                           type: boolean
                         description: Application identifies if an application should
@@ -126,7 +126,6 @@ spec:
                         - revision
                         type: object
                     required:
-                    - inline
                     - packageRef
                     type: object
                   availabilityZone:
