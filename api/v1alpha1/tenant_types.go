@@ -43,7 +43,7 @@ type TenantProperties struct {
 	RepositoryRef string `json:"repositoryRef"`
 	// Applications identify the application information of the tenant
 	Applications *TenantApplications `json:"applications"`
-	// Clusters identify the 
+	// Clusters identify the
 	Clusters []*TenantCluster `json:"clusters"`
 }
 
@@ -76,7 +76,6 @@ type TenantCluster struct {
 	// RepositoryRef identifies the repo where the tenant information is consolidated
 	// The key of the map identifies the user group and the value the repository name
 	RepositoryRef map[string]string `json:"repositoryRef"`
-
 }
 
 // TenantSpec defines the desired state of Tenant

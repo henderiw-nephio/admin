@@ -90,20 +90,75 @@ spec:
               properties:
                 description: Properties define the properties of the Tenant
                 properties:
+                  applications:
+                    description: Applications identify the application information
+                      of the tenant
+                    properties:
+                      inline:
+                        additionalProperties:
+                          type: boolean
+                        description: Application identifies if an application should
+                          be installed or not
+                        type: object
+                      packageRef:
+                        description: PackageRef identifies the package revision to
+                          deploy
+                        properties:
+                          namespace:
+                            description: Namespace is the namespace for both the repository
+                              and package revision
+                            type: string
+                          packageName:
+                            description: PackageName is the name of the package for
+                              the revision
+                            type: string
+                          repository:
+                            description: Repository is the name of the repository
+                              containing the package
+                            type: string
+                          revision:
+                            description: Revision is the specific version number of
+                              the revision of the package
+                            type: string
+                        required:
+                        - packageName
+                        - repository
+                        - revision
+                        type: object
+                    required:
+                    - inline
+                    - packageRef
+                    type: object
                   availabilityZone:
                     description: AvailabilityZone identifies the az the tenant belongs
                       to
                     type: string
-                  clusterRef:
-                    description: 'Namespace -> TBD: this attribute could also be allocated
-                      dynamically Namespace string `json:"namespace"` ClusterRef identifies
-                      the cluster where the tenant operator executes its tasks'
-                    type: string
+                  clusters:
+                    description: Clusters identify the
+                    items:
+                      properties:
+                        clusterRef:
+                          description: ClusterRef identifies a cluster this tenant
+                            operates on
+                          type: string
+                        repositoryRef:
+                          additionalProperties:
+                            type: string
+                          description: RepositoryRef identifies the repo where the
+                            tenant information is consolidated The key of the map
+                            identifies the user group and the value the repository
+                            name
+                          type: object
+                      required:
+                      - clusterRef
+                      - repositoryRef
+                      type: object
+                    type: array
                   deployment:
                     description: Deployment identifies the deployment the tenant belongs
                       to
                     type: string
-                  organaizationRef:
+                  organizationRef:
                     description: OrganizationRef identifies the organization the tenant
                       belongs to
                     type: string
@@ -116,11 +171,14 @@ spec:
                     description: Region identifies the region the tenant belongs to
                     type: string
                   repositoryRef:
-                    description: RepositoryRef identifies the repo where the tenant
-                      information is consolidated
+                    description: ClusterRef identifies the cluster where the tenant
+                      operator executes its tasks ClusterRef string `json:"clusterRef"`
+                      RepositoryRef identifies the repo where the tenant information
+                      is consolidated
                     type: string
                 required:
-                - clusterRef
+                - applications
+                - clusters
                 - repositoryRef
                 type: object
               targetRef:

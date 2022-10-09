@@ -69,16 +69,6 @@ generate: controller-gen kpt kptgen ## Generate code containing DeepCopy, DeepCo
 	rm ${KPT_BLUEPRINT_PKG_DIR}/package-context.yaml
 	rm ${KPT_BLUEPRINT_PKG_DIR}/crd/package-context.yaml
 	rm ${KPT_BLUEPRINT_PKG_DIR}/app/package-context.yaml
-
-.PHONY: generate2
-generate2: controller-gen kpt kptgen ## Generate code containing DeepCopy, DeepCopyInto, and DeepCopyObject method implementations.
-	mkdir -p ${KPT_BLUEPRINT_CFG_DIR}
-	mkdir -p ${KPT_BLUEPRINT_PKG_DIR}/crd/bases
-	$(CONTROLLER_GEN) crd paths="./..." output:crd:artifacts:config=${KPT_BLUEPRINT_PKG_DIR}/crd/bases
-	$(CONTROLLER_GEN) object:headerFile="hack/boilerplate.go.txt" paths="./..."
-	kpt pkg init ${KPT_BLUEPRINT_PKG_DIR} --description "${PROJECT} controller"
-	kptgen apply config ${KPT_BLUEPRINT_PKG_DIR} --fn-config-dir ${KPT_BLUEPRINT_CFG_DIR}
-	rm ${KPT_BLUEPRINT_PKG_DIR}/package-context.yaml
 	
 .PHONY: fmt
 fmt: ## Run go fmt against code.
