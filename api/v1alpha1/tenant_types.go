@@ -26,23 +26,57 @@ import (
 )
 
 type TenantProperties struct {
-	// Namespace -> TBD: this attribute could also be allocated dynamically
-	//Namespace string `json:"namespace"`
-	// ClusterRef identifies the cluster where the tenant operator executes its tasks
-	ClusterRef string `json:"clusterRef"`
-	// RepositoryRef identifies the repo where the tenant information is consolidated
-	RepositoryRef string `json:"repositoryRef"`
 	// OwnerRef identifies the entity that is responsible for the tenant.
 	// The ownerRef is a resource that is typically used for resellers and integrators.
 	OwnerRef string `json:"ownerRef,omitempty"`
 	// OrganizationRef identifies the organization the tenant belongs to
-	OrganizationRef string `json:"organaizationRef,omitempty"`
+	OrganizationRef string `json:"organizationRef,omitempty"`
 	// Deployment identifies the deployment the tenant belongs to
 	Deployment string `json:"deployment,omitempty"`
 	// Region identifies the region the tenant belongs to
 	Region string `json:"region,omitempty"`
 	// AvailabilityZone identifies the az the tenant belongs to
 	AvailabilityZone string `json:"availabilityZone,omitempty"`
+	// ClusterRef identifies the cluster where the tenant operator executes its tasks
+	//ClusterRef string `json:"clusterRef"`
+	// RepositoryRef identifies the repo where the tenant information is consolidated
+	RepositoryRef string `json:"repositoryRef"`
+	// Applications identify the application information of the tenant
+	Applications *TenantApplications `json:"applications"`
+	// Clusters identify the 
+	Clusters []*TenantCluster `json:"clusters"`
+}
+
+type TenantApplications struct {
+	// Application identifies if an application should be installed or not
+	Application map[string]bool `json:"inline"`
+	// PackageRef identifies the package revision to deploy
+	PackageRef PackageRevisionReference `json:"packageRef"`
+}
+
+// PackageRevisionReference is used to reference a particular package revision.
+type PackageRevisionReference struct {
+	// Namespace is the namespace for both the repository and package revision
+	// +optional
+	Namespace string `json:"namespace,omitempty"`
+
+	// Repository is the name of the repository containing the package
+	RepositoryName string `json:"repository"`
+
+	// PackageName is the name of the package for the revision
+	PackageName string `json:"packageName"`
+
+	// Revision is the specific version number of the revision of the package
+	Revision string `json:"revision"`
+}
+
+type TenantCluster struct {
+	// ClusterRef identifies a cluster this tenant operates on
+	ClusterRef string `json:"clusterRef"`
+	// RepositoryRef identifies the repo where the tenant information is consolidated
+	// The key of the map identifies the user group and the value the repository name
+	RepositoryRef map[string]string `json:"repositoryRef"`
+
 }
 
 // TenantSpec defines the desired state of Tenant

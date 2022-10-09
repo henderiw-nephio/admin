@@ -1,0 +1,24 @@
+apiVersion: admin.yndd.io/v1alpha1
+kind: Tenant
+metadata:
+  name: tenant1
+  namespace: ndd-system
+spec:
+  properties:
+    organizationRef: nokia
+    region: eu-west
+    availabilityZone: az1
+    repositoryRef: mgmt-admin
+    applications:
+      topology: true
+      packageRef:
+        repository: yndd-app-packages
+        packageName: applications
+        revision: v1
+    clusters:
+    - clusterRef: eu-west-az1-cluster1
+      repositoryRef:
+        group1: eu-west-az1-cluster1-group1
+        group2: eu-west-az1-cluster1-group2
+
+    

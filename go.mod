@@ -5,7 +5,7 @@ go 1.18
 require (
 	github.com/GoogleContainerTools/kpt/porch/api v0.0.0-20220907033140-7fb3c1bf8fb7
 	github.com/yndd/app-runtime v0.0.32
-	github.com/yndd/ndd-runtime v0.5.26
+	github.com/yndd/ndd-runtime v0.5.33
 	k8s.io/api v0.24.2
 	k8s.io/apimachinery v0.24.2
 	k8s.io/cli-runtime v0.23.1

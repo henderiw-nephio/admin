@@ -59,6 +59,21 @@ manifests: controller-gen ## Generate WebhookConfiguration, ClusterRole and Cust
 generate: controller-gen kpt kptgen ## Generate code containing DeepCopy, DeepCopyInto, and DeepCopyObject method implementations.
 	mkdir -p ${KPT_BLUEPRINT_CFG_DIR}
 	mkdir -p ${KPT_BLUEPRINT_PKG_DIR}/crd/bases
+	mkdir -p ${KPT_BLUEPRINT_PKG_DIR}/app
+	$(CONTROLLER_GEN) crd paths="./..." output:crd:artifacts:config=${KPT_BLUEPRINT_PKG_DIR}/crd/bases
+	$(CONTROLLER_GEN) object:headerFile="hack/boilerplate.go.txt" paths="./..."
+	kpt pkg init ${KPT_BLUEPRINT_PKG_DIR} --description "${PROJECT} controller"
+	kpt pkg init ${KPT_BLUEPRINT_PKG_DIR}/crd --description "${PROJECT} crd"
+	kpt pkg init ${KPT_BLUEPRINT_PKG_DIR}/app --description "${PROJECT} app"
+	kptgen apply config ${KPT_BLUEPRINT_PKG_DIR} --fn-config-dir ${KPT_BLUEPRINT_CFG_DIR}
+	rm ${KPT_BLUEPRINT_PKG_DIR}/package-context.yaml
+	rm ${KPT_BLUEPRINT_PKG_DIR}/crd/package-context.yaml
+	rm ${KPT_BLUEPRINT_PKG_DIR}/app/package-context.yaml
+
+.PHONY: generate2
+generate2: controller-gen kpt kptgen ## Generate code containing DeepCopy, DeepCopyInto, and DeepCopyObject method implementations.
+	mkdir -p ${KPT_BLUEPRINT_CFG_DIR}
+	mkdir -p ${KPT_BLUEPRINT_PKG_DIR}/crd/bases
 	$(CONTROLLER_GEN) crd paths="./..." output:crd:artifacts:config=${KPT_BLUEPRINT_PKG_DIR}/crd/bases
 	$(CONTROLLER_GEN) object:headerFile="hack/boilerplate.go.txt" paths="./..."
 	kpt pkg init ${KPT_BLUEPRINT_PKG_DIR} --description "${PROJECT} controller"
@@ -137,7 +152,7 @@ KUSTOMIZE_VERSION ?= v3.8.7
 CONTROLLER_TOOLS_VERSION ?= v0.9.2
 ENVTEST_K8S_VERSION ?= 1.24.2
 KPT_VERSION ?= main
-KPTGEN_VERSION ?= v0.0.5
+KPTGEN_VERSION ?= v0.0.9
 
 KUSTOMIZE_INSTALL_SCRIPT ?= "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"
 .PHONY: kustomize

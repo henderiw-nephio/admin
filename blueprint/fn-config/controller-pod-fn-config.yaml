@@ -10,19 +10,21 @@ spec:
   replicas: 1
   permissionRequests:
     controller:
-    - apiGroups: ["*"]
-      resources: [events]
-      verbs: [get, list, watch, update, patch, create, delete]
+      permissions:
+      - apiGroups: ["*"]
+        resources: [events]
+        verbs: [get, list, watch, update, patch, create, delete]
     leader-election:
-    - apiGroups: [""]
-      resources: [configmaps]
-      verbs: [get, list, watch, update, patch, create, delete]
-    - apiGroups: [coordination.k8s.io]
-      resources: [leases]
-      verbs: [get, list, watch, update, patch, create, delete]
-    - apiGroups: [""]
-      resources: [events]
-      verbs: [create, patch]
+      permissions:
+      - apiGroups: [""]
+        resources: [configmaps]
+        verbs: [get, list, watch, update, patch, create, delete]
+      - apiGroups: [coordination.k8s.io]
+        resources: [leases]
+        verbs: [get, list, watch, update, patch, create, delete]
+      - apiGroups: [""]
+        resources: [events]
+        verbs: [create, patch]
   template:
     spec:
       containers:
