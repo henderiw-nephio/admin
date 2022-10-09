@@ -102,6 +102,7 @@ type TenantStatus struct {
 // +kubebuilder:printcolumn:name="REGION",type="string",JSONPath=".spec.properties.organaizationRef",description="region the tenant is deployed in'"
 // +kubebuilder:printcolumn:name="AZ",type="string",JSONPath=".spec.properties.availabilityZone",description="availabilityZone the tenant is deployed in'"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
+// +kubebuilder:resource:categories={yndd,admin}
 
 // Tenant is the Schema for the tenants API
 type Tenant struct {

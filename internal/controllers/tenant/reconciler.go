@@ -13,32 +13,12 @@ limitations under the License.
 
 package tenant
 
-import (
-	"context"
-	"errors"
-	"strings"
-	"time"
-
-	"github.com/GoogleContainerTools/kpt/porch/api/porch/v1alpha1"
-	"github.com/yndd/admin/pkg/appresource"
-	"github.com/yndd/admin/pkg/porch2"
-	"github.com/yndd/app-runtime/pkg/reconciler/managed"
-	"github.com/yndd/ndd-runtime/pkg/event"
-	"github.com/yndd/ndd-runtime/pkg/logging"
-	"github.com/yndd/ndd-runtime/pkg/resource"
-	"github.com/yndd/ndd-runtime/pkg/shared"
-	"k8s.io/client-go/rest"
-	ctrl "sigs.k8s.io/controller-runtime"
-	"sigs.k8s.io/controller-runtime/pkg/client"
-
-	adminv1alpha1 "github.com/yndd/admin/api/v1alpha1"
-	namespaceresrv1 "github.com/yndd/admin/pkg/namespace/v1"
-)
-
+/*
 const (
 	errUnexpectedResource = "unexpected object"
 	//errGetK8sResource     = "cannot get organization resource"
 )
+*/
 
 //+kubebuilder:rbac:groups=porch.kpt.dev,resources=packagerevisionresources,verbs=get;list;watch;create;update;patch;delete
 //+kubebuilder:rbac:groups=porch.kpt.dev,resources=packagerevisionresources/status,verbs=get;update;patch
@@ -49,6 +29,7 @@ const (
 //+kubebuilder:rbac:groups=admin.yndd.io,resources=tenants/status,verbs=get;update;patch
 //+kubebuilder:rbac:groups=admin.yndd.io,resources=tenants/finalizers,verbs=update
 
+/*
 // Setup adds a controller that reconciles infra.
 func Setup(mgr ctrl.Manager, nddcopts *shared.NddControllerOptions) error {
 	name := strings.Join([]string{adminv1alpha1.Group, strings.ToLower(adminv1alpha1.TenantKind)}, "/")
@@ -77,7 +58,9 @@ func Setup(mgr ctrl.Manager, nddcopts *shared.NddControllerOptions) error {
 		WithEventFilter(resource.IgnoreUpdateWithoutGenerationChangePredicate()).
 		Complete(r)
 }
+*/
 
+/*
 type applogic struct {
 	client          resource.ClientApplicator
 	porchClient     client.Client
@@ -199,3 +182,4 @@ func (r *applogic) populateSchema(ctx context.Context, mr resource.Managed) (app
 
 	return resources, nil
 }
+*/

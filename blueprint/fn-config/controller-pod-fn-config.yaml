@@ -10,6 +10,7 @@ spec:
   replicas: 1
   permissionRequests:
     controller:
+      scope: cluster
       permissions:
       - apiGroups: ["*"]
         resources: [events]
