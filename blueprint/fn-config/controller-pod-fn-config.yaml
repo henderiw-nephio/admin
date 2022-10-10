@@ -10,11 +10,14 @@ spec:
   replicas: 1
   permissionRequests:
     controller:
-      scope: cluster
+      #scope: cluster
       permissions:
       - apiGroups: ["*"]
         resources: [events]
         verbs: [get, list, watch, update, patch, create, delete]
+    porch:
+      scope: cluster
+      permissions:
       - apiGroups: [porch.kpt.dev]
         resources: [packagerevisionresources, packagerevisions]
         verbs: [get, list, watch, update, patch, create, delete]

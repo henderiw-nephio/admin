@@ -10,20 +10,8 @@ metadata:
     app.kubernetes.io/name: admin
     app.kubernetes.io/part-of: admin
     app.kubernetes.io/version: tbd
-  name: admin-controller-controller-role
+  name: admin-controller-porch-role
 rules:
-- apiGroups:
-  - '*'
-  resources:
-  - events
-  verbs:
-  - get
-  - list
-  - watch
-  - update
-  - patch
-  - create
-  - delete
 - apiGroups:
   - porch.kpt.dev
   resources:

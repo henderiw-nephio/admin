@@ -9,6 +9,9 @@ metadata:
 spec:
   group: admin.yndd.io
   names:
+    categories:
+    - yndd
+    - admin
     kind: Tenant
     listKind: TenantList
     plural: tenants
