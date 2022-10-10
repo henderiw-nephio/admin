@@ -25,3 +25,16 @@ rules:
   - patch
   - create
   - delete
+- apiGroups:
+  - admin.yndd.io
+  resources:
+  - tenants
+  - tenants/status
+  verbs:
+  - get
+  - list
+  - watch
+  - update
+  - patch
+  - create
+  - delete
