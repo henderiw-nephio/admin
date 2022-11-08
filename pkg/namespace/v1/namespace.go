@@ -43,6 +43,10 @@ func BuildNamespace(name string) (*kyaml.RNode, error) {
 		},
 		ObjectMeta: metav1.ObjectMeta{
 			Name: name,
+			Annotations: map[string]string{
+				"internal.config.kubernetes.io/index": "0",
+				"internal.config.kubernetes.io/path":  "namespace.yaml",
+			},
 		},
 	}
 

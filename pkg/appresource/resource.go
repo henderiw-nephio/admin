@@ -49,13 +49,18 @@ func (x *resources) Copy() Resources {
 
 // IsEqual validates if the resources are equal or not
 func (x *resources) IsEqual(arnl []*yaml.RNode) (bool, error) {
-	for _, nr := range x.resources {
+
+	newResources := x.Copy()
+	for _, nr := range newResources.Get() {
 		found := false
 		for i, ar := range arnl {
+			// right now we clear annotations but this is a workaround
+			nr.SetAnnotations(map[string]string{})
 			nrStr, err := nr.String()
 			if err != nil {
 				return false, err
 			}
+			// right now we clear annotations but this is a workaround
 			ar.SetAnnotations(map[string]string{})
 			arStr, err := ar.String()
 			if err != nil {
@@ -67,11 +72,12 @@ func (x *resources) IsEqual(arnl []*yaml.RNode) (bool, error) {
 			}
 		}
 		if !found {
+			fmt.Printf("new resource not ok: %s\n", nr.MustString())
 			return false, nil
 		}
 	}
 	// this means some entries should be deleted
-	// hence the resource ar enot equal
+	// hence the resource are not equal
 	if len(arnl) != 0 {
 		return false, nil
 	}

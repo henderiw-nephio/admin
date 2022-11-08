@@ -72,3 +72,27 @@ func (x *Tenant) SetRootPaths(rootPaths []string) {
 func (x *Tenant) GetNamespacedName() string {
 	return strings.Join([]string{x.Namespace, x.Name}, "/")
 }
+
+func (x *PackageRevisionReference) IsFound(selector *PackageRevisionReference) bool {
+	if selector == nil {
+		return true
+	}
+	if len(selector.RepositoryName) > 0 {
+		if x.RepositoryName != selector.RepositoryName {
+			return false
+		}
+	}
+
+	if len(selector.PackageName) > 0 {
+		if x.PackageName != selector.PackageName {
+			return false
+		}
+	}
+
+	if len(selector.Revision) > 0 {
+		if x.Revision != selector.Revision {
+			return false
+		}
+	}
+	return true
+}

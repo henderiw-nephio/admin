@@ -1,4 +1,4 @@
-package porch2
+package pkgrev
 
 import (
 	porchv1alpha1 "github.com/GoogleContainerTools/kpt/porch/api/porch/v1alpha1"
@@ -8,7 +8,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
-func buildPackageRevision(namespace, repositoryRef, packageName, revision string, mr resource.Managed) *porchv1alpha1.PackageRevision {
+func buildPackageRevision(namespace, repositoryRef, packageName, revision string, mr resource.Object) *porchv1alpha1.PackageRevision {
 	return &porchv1alpha1.PackageRevision{
 		TypeMeta: metav1.TypeMeta{
 			Kind:       "PackageRevision",

@@ -38,7 +38,7 @@ import (
 
 	adminv1alpha1 "github.com/yndd/admin/api/v1alpha1"
 	"github.com/yndd/admin/internal/controllers"
-	"github.com/yndd/admin/pkg/porch2"
+	"github.com/yndd/admin/pkg/porch"
 	//+kubebuilder:scaffold:imports
 )
 
@@ -106,13 +106,13 @@ func main() {
 		os.Exit(1)
 	}
 
-	porchClient, err := porch2.CreateClient()
+	porchClient, err := porch.CreateClient()
 	if err != nil {
 		logger.Debug("unable to create porch client", "error", err)
 		os.Exit(1)
 	}
 
-	porchRESTClient, err := porch2.CreateRESTClient()
+	porchRESTClient, err := porch.CreateRESTClient()
 	if err != nil {
 		logger.Debug("unable to create porch client", "error", err)
 		os.Exit(1)
